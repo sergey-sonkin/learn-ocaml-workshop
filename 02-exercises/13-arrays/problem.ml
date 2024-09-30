@@ -110,7 +110,7 @@ let () =
 
 (* Write a function that takes an [int array array] and doubles each of the
    elements at the specified indices. *)
-let double_matrix matrix : unit = (Array.iter matrix ~f:double)
+let double_matrix matrix : unit = Array.iter matrix ~f:double
 
 let%test "Testing double_matrix..." = 
   let matrix = [| [| 1; 2; 3 |]; [| 1; 1; 1 |] |] in
