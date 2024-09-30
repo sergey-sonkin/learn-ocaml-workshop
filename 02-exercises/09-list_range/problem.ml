@@ -13,7 +13,13 @@ let () =
    including [from] but excluding [to_] in increasing order.
 
    {| val range : int -> int -> int list |} *)
-let range from to_ = failwith "For you to implement"
+let range from to_ = 
+   let rec range_helper from to_ curr = if to_ > from then range_helper (from + 1) to_ (List.append curr [from]) else curr
+   in range_helper from to_ []
+
+let range from to_ = 
+   let rec range_helper from to_ curr = if to_ > from then range_helper (from + 1) to_ (from :: curr) else List.rev curr
+   in range_helper from to_ []
 
 (* You might've noticed that the list type in the function definitions of the
    operator [( @ )] (and also [( :: )]) look a bit different from every other

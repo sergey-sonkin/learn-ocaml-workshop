@@ -23,7 +23,8 @@ open! Base
    // C, C++, or Java type signature
    int four; 
 *)
-let four = 4
+
+let four: int = 4;;
 
 (* [float_four] is a value with the type float. We write the signature like
    this:
@@ -42,7 +43,9 @@ let four = 4
 
    Now, try inserting an incorrect signature for [float_four] in the mli to see
    what error the compiler gives you. *)
-let float_four = 4.
+(*{| val float_four : float |}*)
+(*{| val float_four : float |}*)
+let float_four: float = 4.;;
 
 (* In OCaml, floats are distinguished from ints by the presence of a decimal
    point. [0] is an int, [0.] is a float.
@@ -70,11 +73,11 @@ let float_four = 4.
    value of the last statement in that function.
 
    Try implementing [int_average].  *)
-let int_average x y = failwith "For you to implement"
+let int_average x y = (x + y) / 2
 
 (* Now try implementing [float_average]. Remember that you can check the mli for
    the type of this function. *)
-let float_average x y = failwith "For you to implement"
+let float_average x y = (x +. y) /. 2.
 
 (* Note that in OCaml, parenthese are not necessary when applying a function! So
    the following expression computes the average of 10 and 20:
