@@ -75,9 +75,11 @@ let%test "Testing double..." =
 (* Write a function that takes an [int array] and a list of indicies and
    doubles each of the elements at the specified indices. *)
 let double_selectively array indices = 
-  let double_value ii value = if Array.exists array (fun x -> x = elem) then (array.(ii) <- value * 2)
-  (*let double_value ii value = array.(ii) <- value * 2*)
-  in Array.iteri array ~f:double_value
+  let rec double_selectively_helper array indices = 
+    match indices with
+    | hd :: tl -> (array.(hd) <- array.(hd) * 2); double_selectively_helper array tl
+    | _ -> ()
+  in double_selectively_helper array indices
 
 let%test "Testing double_selectively..." = 
   let array = [| 1; 1; 1 |] in
@@ -108,7 +110,7 @@ let () =
 
 (* Write a function that takes an [int array array] and doubles each of the
    elements at the specified indices. *)
-let double_matrix matrix : unit = failwith "For you to implement"
+let double_matrix matrix : unit = (Array.iter matrix ~f:double)
 
 let%test "Testing double_matrix..." = 
   let matrix = [| [| 1; 2; 3 |]; [| 1; 1; 1 |] |] in
