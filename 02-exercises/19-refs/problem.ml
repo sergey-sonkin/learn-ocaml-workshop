@@ -18,7 +18,26 @@ let () =
    let's iterate over the list and explicitly maintain refs of the minimum and
    maximum values seen so far instead. *)
 let min_and_max lst =
-  failwith "For you to implement"
+  let rec min_and_max_helper lst min_ref max_ref =
+    match lst with
+    | hd :: tl -> 
+        if hd < !min_ref then min_ref := hd;
+        if hd > !max_ref then max_ref := hd;
+        min_and_max_helper tl min_ref max_ref
+    | _ -> (!min_ref, !max_ref)
+  in min_and_max_helper lst (ref 9999) (ref (-1 * 9999))
+
+exception Empty_list
+let min_and_max lst = 
+  match lst with
+  | [] -> raise Empty_list
+  | hd :: tl ->
+      let rec aux (min_val, max_val) = function
+        | [] -> (min_val, max_val)  (* Return the final result when the list is empty *)
+        | h :: t ->
+            aux (min h min_val, max h max_val) t
+      in
+      aux (hd, hd) tl
 
 (* By the way, can you guess how a [ref] is implemented under the hood? 
 
